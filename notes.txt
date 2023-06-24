@@ -1,0 +1,20 @@
+listen for textChannelRequest => {
+  Log(textChannelRequest)
+  
+  parse(textChannelRequest) {
+    colly(make a search from base url for the textChannelRequest)
+    return mostPopularResult
+  }
+
+  scrape(mostPopularResult) {
+    // find the information that is uniform enough to be reliably returned.
+    // current idea image url of builds
+    return imageURL array
+  }
+
+  response(imageURL array) {
+    send a discord chat for each imageURL
+    logstatus 100
+  }
+  return log(status 100)
+}
