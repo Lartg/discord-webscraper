@@ -8,10 +8,20 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/gocolly/colly"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	discord, err := discordgo.New("Bot " + os.Getenv("DISCORD_BOT_TOKEN"))
+	// get discord bot env vars
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	discordBotToken := os.Getenv("DISCORD_BOT_TOKEN")
+
+	//-------------------------------------------------
+	discord, err := discordgo.New("Bot " + os.Getenv(discordBotToken))
 	if err != nil {
 		log.Fatal(err)
 	}

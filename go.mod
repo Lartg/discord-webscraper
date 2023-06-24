@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/bwmarrin/discordgo v0.27.1
 	github.com/gocolly/colly v1.2.0
+	github.com/joho/godotenv v1.5.1
 )
 
 require (
