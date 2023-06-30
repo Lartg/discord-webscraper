@@ -56,18 +56,18 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		//--------------------------------------------------------
 		// enter css selector for the article card
-		// var anchors []string
 		c.OnHTML("#article-list .col-12", func(e *colly.HTMLElement) {
 			// get article card title
 			// if title contains query store anchor
-
 			title := e.ChildTexts("p")
 			queryCheck := strings.Contains((title[1]), query)
 			if queryCheck {
 				anchor := e.ChildAttr("a", "href")
-				fmt.Println(anchor)
+				newURL := baseURL + anchor
+				s.ChannelMessageSend(m.ChannelID, newURL)
 			}
 		})
+
 		//--------------------------------------------------------
 		// Visit the search URL and scrape the page
 		err := c.Visit(baseURL + "/en/latest/all.html")
@@ -77,5 +77,6 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		// iterate through links and send a message for each
+
 	}
 }

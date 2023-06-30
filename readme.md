@@ -1,3 +1,3 @@
-This is a start for a discord bot. Using colly it will return the most popular diablo 4 build corresponding to the request.
+This is a start for a discord bot. Using colly it will return recent f1 articles that include the request in the title.
 
-Currently just trying to get it to make a google search
+Have not normalized text yet, so must be precise
