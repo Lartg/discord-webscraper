@@ -6,8 +6,6 @@ import (
 	"os"
 	"strings"
 
-	"net/url"
-
 	"github.com/bwmarrin/discordgo"
 	"github.com/gocolly/colly/v2"
 	"github.com/joho/godotenv"
@@ -17,8 +15,7 @@ func main() {
 	// Load environment variables from .env file
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file: ", err)
-		return
+		panic("Error loading .env file")
 	}
 
 	// Create a new Discord session.
@@ -52,44 +49,33 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Check if the message starts with "./"
 	if strings.HasPrefix(m.Content, "./") {
 		query := strings.TrimPrefix(m.Content, "./")
-		searchURL := "https://www.google.com/search?q=" + url.QueryEscape(query)
+		baseURL := "https://www.formula1.com"
 
 		// Create a new collector
 		c := colly.NewCollector()
 
-		// Variable to store the first link
-		var firstLink string
+		//--------------------------------------------------------
+		// enter css selector for the article card
+		// var anchors []string
+		c.OnHTML("#article-list .col-12", func(e *colly.HTMLElement) {
+			// get article card title
+			// if title contains query store anchor
 
-		// Set a flag to track if the first link has been found
-		firstLinkFound := false
-
-		// Extract the first link from the Google search results
-		c.OnHTML("a[href]", func(e *colly.HTMLElement) {
-			if !firstLinkFound {
-				link := e.Attr("href")
-				if strings.HasPrefix(link, "/url?q=") {
-					decodedLink, err := url.QueryUnescape(link[7:])
-					if err == nil {
-						firstLink = decodedLink
-						firstLinkFound = true
-					}
-				}
+			title := e.ChildTexts("p")
+			queryCheck := strings.Contains((title[1]), query)
+			if queryCheck {
+				anchor := e.ChildAttr("a", "href")
+				fmt.Println(anchor)
 			}
 		})
-
+		//--------------------------------------------------------
 		// Visit the search URL and scrape the page
-		err := c.Visit(searchURL)
+		err := c.Visit(baseURL + "/en/latest/all.html")
 		if err != nil {
 			log.Println("Error scraping Google search page: ", err)
 			return
 		}
 
-		// Send the first link from the search results as a message
-		if firstLink != "" {
-			_, err := s.ChannelMessageSend(m.ChannelID, firstLink)
-			if err != nil {
-				log.Println("Error sending message: ", err)
-			}
-		}
+		// iterate through links and send a message for each
 	}
 }
