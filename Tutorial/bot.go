@@ -25,9 +25,10 @@ func main() {
 		return
 	}
 
-	// Register messageCreate handler
-	dg.AddHandler(diceCreate)
-	dg.AddHandler(webScraperCreate)
+	// Register command handlers - these read messages for prefixes to check if they need to do things. commands could get very complex using many flags
+	dg.AddHandler(diceCreate)       // uses "!" message prefix
+	dg.AddHandler(webScraperCreate) // uses "./" message prefix
+
 	// Open a websocket connection to Discord.
 	err = dg.Open()
 	if err != nil {
@@ -40,10 +41,10 @@ func main() {
 	<-make(chan struct{})
 }
 
-/*	----------------------------------------------------------------------------
+/*	----------------------------------------------------------------------------\
+This Function will:
 	Check if the message starts with "!"
 		Get the following message string that === dice roll (e.g. 1d6, 2d6, 1d8)
-			log message and respose
 			Send a response message containing dice rolls.
 */
 
@@ -60,11 +61,11 @@ func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 /* ----------------------------------------------------------------------------
-Check if the message starts with "./"
-	Get the following message string.
-		log message and resonse
-		Send a response message.
-
+This Function will:
+	Check if the message starts with "./"
+		Get the command string.
+		Scrape a website for matches to the command
+			return links to matches
 */
 
 func webScraperCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
