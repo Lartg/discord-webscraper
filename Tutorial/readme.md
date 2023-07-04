@@ -1,3 +1,21 @@
-This is a start for a discord bot. Using colly it will return recent f1 articles that include the request in the title.
+# [DiscordGo] bot getting started.
 
-Have not normalized text yet, so must be precise with query.
+Tools Used
+  [DiscordAPI]
+  [GoLang] 
+  [godotenv]
+  [DiscordGo]
+  [colly]
+  
+  
+1. Change the name of env.txt to .env
+2. fill out the fields with the information you get from the discordAPI as you create your bot to securely store your environment variables
+  
+  
+## [DiscordAPI]
+
+## Setting up go
+1. [install]
+2. 
+## importing your environment variables
+1. install
