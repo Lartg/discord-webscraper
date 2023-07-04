@@ -1,11 +1,11 @@
-# [DiscordGo] bot getting started.
+# [DiscordGo] bot [colly/v2] web scraper tutorial.
 
 Tools Used
   [DiscordAPI]
   [GoLang] 
   [godotenv]
   [DiscordGo]
-  [colly]
+  [colly/v2]
   
   
 1. Change the name of env.txt to .env
