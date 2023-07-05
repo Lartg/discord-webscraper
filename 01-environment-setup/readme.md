@@ -1,4 +1,4 @@
-# Getting started with [DiscordGo]
+# Environment Set-up
 
 # Tools Used to Get Started
 - [Go]
