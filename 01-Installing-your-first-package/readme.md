@@ -40,4 +40,5 @@ DISCORD_BOT_PERMISSIONS_INT="your-permissions-integer"
   }
   ```
 
+Now that we can protect your data, we are ready to head to the [Discord Developer Portal!](https://discord.com/developers/docs/intro)
 
