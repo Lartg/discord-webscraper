@@ -1,5 +1,5 @@
 ## [Go](https://go.dev/) - The language used in this tutorial
-  - ### If unfamiliar with Go
+  - ### If unfamiliar with Go, this will help you
     - take [A Tour of Go](https://go.dev/tour/welcome/1)
     - [Installation Instructions](https://go.dev/doc/install) (vary by what machine you are using)
   - ### Starting your first go project
