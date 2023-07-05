@@ -1,9 +1,9 @@
 
 
 ## [godotenv](https://pkg.go.dev/github.com/joho/godotenv@v1.5.1) - Our first package
-  ##### a .env file protects valuable information such as your Discord bot token
+  ###### a .env file protects valuable information such as your Discord bot token
   ### Installation
-  - in your terminal run
+  - to download this package run in your terminal:
   ```
   go get github.com/joho/godotenv
   ```
