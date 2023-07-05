@@ -2,9 +2,9 @@
 
 ## Installation/Set-up Order
 - [Go](https://go.dev/)
-- [godotenv] 
-- [DiscordAPI] 
-- [DiscordGo]
+- [godotenv](https:///github.com/joho/godotenv@v1.5.1)
+- [DiscordAPI](https://discord.com/developers/docs/intro)
+- [DiscordGo](https://github.com/bwmarrin/discordgo)
 
 
 ## [Go](https://go.dev/) - The language used in this tutorial
@@ -49,13 +49,12 @@
 touch .env
 ```
 2. enter these fields in the file to fill with your Discord Bot information
-'''
 DISCORD_BOT_APP_ID="your-app-id"
 DISCORD_BOT_PUBLIC_KEY="your-puclic-key"
 DISCORD_BOT_TOKEN="your-bot-token"
 DISCORD_BOT_PERMISSIONS_INT="your-permissions-integer"
-'''
-3. Import your envirnment variables, editing bot.go
+
+3. Import your environment variables, editing bot.go
 ```go
   package main
 
