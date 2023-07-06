@@ -42,8 +42,8 @@ func main() {
 /*	----------------------------------------------------------------------------\
 This Function will:
 	Check if the message starts with "!"
-		Get the following message string that === dice roll (e.g. 1d6, 2d6, 1d8)
-			Send a response message containing dice rolls.
+		Get the following message string that corresponds to a dice roll (e.g. 1d6, 2d6, 1d8)
+			Send a response message containing roll outcomes.
 */
 
 func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
