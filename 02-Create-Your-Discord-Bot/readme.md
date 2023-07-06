@@ -17,6 +17,6 @@
 
 7. **Invite the Bot to Your Server**: To invite your bot to a server, go to the "OAuth2" tab in the left sidebar. Under the "URL Generator" section, select the necessary bot permissions based on your bot's intended functionality. In this tutorial select "bot", then in the next window select: Read Messages/View Channels, Send Messages, Send Messages in Threads, Embed Links. Then, copy the generated OAuth2 URL and open it in a new browser tab. Select a server where you have the necessary permissions, and follow the authorization flow to add the bot to your chosen server.
 
-That's it! Your bot is now created and added to your server. You can use the bot token to authenticate and interact with the Discord API using DiscordGo. Remember to refer to the [Discord API documentation](https://discord.com/developers/docs/intro) for further information on how to use the API and implement bot functionality.
+Your bot is now created and added to your server. You can use the bot token to authenticate and interact with the Discord API using DiscordGo. Defer to the [Discord API documentation](https://discord.com/developers/docs/intro) for more information on how to use the API and implement bot functionality.
 
-## [DiscordGo] - The go library used to interface with the [DiscordAPI]
+Onto the next module where we will begin interfacing with our new bot!
