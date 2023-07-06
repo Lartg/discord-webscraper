@@ -1,1 +1,3 @@
+# install, connect
+
 ## [DiscordGo](https://github.com/bwmarrin/discordgo) - The go library used to interface with your discord bot
