@@ -4,3 +4,5 @@
 - [DiscordAPI](https://discord.com/developers/docs/intro)
 - [DiscordGo](https://github.com/bwmarrin/discordgo)
 - [colly/v2]
+
+00-02 complete
