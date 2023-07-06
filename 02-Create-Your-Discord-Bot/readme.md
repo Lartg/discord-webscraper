@@ -1,4 +1,4 @@
-# Establishing a Connection to a Discord Server
+# Creating a Discord Bot
 
 ## DiscordAPI - [Developer Portal](https://discord.com/developers/docs/intro)
   To create a new Discord bot in the Discord Developer Portal, follow these steps:
