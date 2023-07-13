@@ -1,4 +1,4 @@
-# Currently just an example
+# Currently just a well commented example
 
 # [DiscordGo] bot [colly/v2] web scraper tutorial.
 - learn to make simple [colly/v2] webscraper that responds to chat message commands via [DiscordGo]
