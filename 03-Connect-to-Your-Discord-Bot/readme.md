@@ -63,4 +63,4 @@ func main() {
 ```
 creates an empty channel. The left arrow `<-` shows that the program is waiting to receive a value from the **empty** structure. Because no value will be received, because it is empty and takes no memory, this is a lightweight way of keeping the program open/listening, indefinetely, until interuption.
 
-### Now that we have a websocket connection, we can add a command handler to do cool things.
+### Check the discord server that you have invited the bot to. If the bot is online (little green dot by it's name, then we have a websocket connection, and are ready to add a commands that do cool things.
