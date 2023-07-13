@@ -3,11 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
-	"math/rand"
 	"os"
-	"strconv"
 	"strings"
-	"time"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/joho/godotenv"
@@ -54,62 +51,8 @@ func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID || m.Author.Bot {
 		return
 	}
-
 	// Parse command
 	if strings.HasPrefix(m.Content, "!") {
-		command := strings.TrimPrefix(m.Content, "!")
-		result := rollDice(command)
-		if result != nil {
-			response := fmt.Sprintf("Rolling %s: ", command)
-			for i, roll := range result {
-				if i > 0 {
-					response += ", "
-				}
-				response += fmt.Sprintf("%d", roll)
-			}
-			s.ChannelMessageSend(m.ChannelID, response)
-		} else {
-			s.ChannelMessageSend(m.ChannelID, "Invalid dice roll command.")
-		}
+		s.ChannelMessageSend(m.ChannelID, "Command received")
 	}
-}
-
-// Our Dice rolling helper functions
-func rollDice(roll string) []int {
-	parts := strings.Split(roll, "d")
-	if len(parts) != 2 {
-		return nil
-	}
-
-	numDice := parseDiceCount(parts[0])
-	numSides := parseDiceSides(parts[1])
-
-	if numDice <= 0 || numSides <= 0 {
-		return nil
-	}
-
-	rand.Seed(time.Now().UnixNano())
-
-	results := make([]int, numDice)
-	for i := 0; i < numDice; i++ {
-		results[i] = rand.Intn(numSides) + 1
-	}
-
-	return results
-}
-
-func parseDiceCount(countStr string) int {
-	count, err := strconv.Atoi(countStr)
-	if err != nil {
-		return 0
-	}
-	return count
-}
-
-func parseDiceSides(sidesStr string) int {
-	sides, err := strconv.Atoi(sidesStr)
-	if err != nil {
-		return 0
-	}
-	return sides
 }

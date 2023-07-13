@@ -22,7 +22,7 @@
     - the check we have added ensures that bots in the channel will not create recursive requests. You should add this check to any event handler involving the reading of messages. 
   #### Parse messages for a command
     - I like to use message prefixes as flags. Something easy to type, but you wouldn't typically start a message/sentence with. In this tutorial messages that begin with an "!" will be read as a command.
-    - add the command check below, and feel free to deviate from the tutorial here to parse the cammand however you wish
+    
   ```go
   func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Ignore messages from the bot itself or other bots to prevent recursive requests
@@ -35,7 +35,12 @@
     }
   }
   ```
-
+  #### Register the event Handler
+    - before opening the websocket connection, we register our command handlers, refer to bot.go if this is confusing
+  ```go
+  // Register command handlers - these read messages for prefixes to check if they need to do things. commands could get very complex using many flags
+	dg.AddHandler(diceCreate) // uses "!" message prefix
+  ```
 ## Sending a Response
-- bareboned dice roller to check functionality of the bot before writing your own code
-- gives a structure to have some fun trial and error 
+- Start your bot, and make sure that messages with our command flag are received and a channel message is sent in response.
+- Now you have created a discord bot that can recognize, and respond to commands. Feel free to deviate from this tutorial, and parse your commands however you wish. 
