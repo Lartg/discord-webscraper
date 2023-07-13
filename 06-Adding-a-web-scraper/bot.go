@@ -26,7 +26,6 @@ func main() {
 	}
 
 	// Register command handlers - these read messages for prefixes to check if they need to do things. commands could get very complex using many flags
-	dg.AddHandler(diceCreate)       // uses "!" message prefix
 	dg.AddHandler(webScraperCreate) // uses "./" message prefix
 
 	// Open a websocket connection to Discord.
@@ -39,25 +38,6 @@ func main() {
 	// Wait here until interrupted.
 	fmt.Println("Bot is now running. Press Ctrl+C to exit.")
 	<-make(chan struct{})
-}
-
-/*	----------------------------------------------------------------------------\
-This Function will:
-	Check if the message starts with "!"
-		Get the following message string that === dice roll (e.g. 1d6, 2d6, 1d8)
-			Send a response message containing dice rolls.
-*/
-
-func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-	// Ignore messages from the bot itself or other bots to prevent recursive requests
-	if m.Author.ID == s.State.User.ID || m.Author.Bot {
-		return
-	}
-
-	// Parse command
-	if strings.HasPrefix(m.Content, "!") {
-		fmt.Println("we have not yet coded dice rolls.")
-	}
 }
 
 /* ----------------------------------------------------------------------------

@@ -43,4 +43,4 @@
   ```
 ## Sending a Response
 - Start your bot, and make sure that messages with our command flag are received and a channel message is sent in response.
-- Now you have created a discord bot that can recognize, and respond to commands. Feel free to deviate from this tutorial, and parse your commands however you wish, but continue if you want to make a dice roller.
+- Now you have created a discord bot that can recognize, and respond to commands. This now becomes like any simple CLI go program, but the interface is a discord channel instead.

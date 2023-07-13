@@ -55,7 +55,7 @@ func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	// Parse command
+	// --------------------NEW STUFF BELOW-----------------------
 	if strings.HasPrefix(m.Content, "!") {
 		command := strings.TrimPrefix(m.Content, "!")
 		result := rollDice(command)
@@ -69,22 +69,24 @@ func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			}
 			s.ChannelMessageSend(m.ChannelID, response)
 		} else {
-			s.ChannelMessageSend(m.ChannelID, "Invalid dice roll command.")
+			s.ChannelMessageSend(m.ChannelID, "Invalid dice roll command. Use form of How many dice rolled, a 'd' for dice, and how many sides. Ex. 1d6 rolls 1 dice with 6 sides.")
 		}
 	}
 }
 
-// Our Dice rolling helper functions
+// Our Dice rolling helper function
 func rollDice(roll string) []int {
 	parts := strings.Split(roll, "d")
 	if len(parts) != 2 {
 		return nil
 	}
 
-	numDice := parseDiceCount(parts[0])
-	numSides := parseDiceSides(parts[1])
-
-	if numDice <= 0 || numSides <= 0 {
+	numDice, err := strconv.Atoi(parts[0])
+	if err != nil {
+		return nil
+	}
+	numSides, err := strconv.Atoi(parts[1])
+	if err != nil {
 		return nil
 	}
 
@@ -96,20 +98,4 @@ func rollDice(roll string) []int {
 	}
 
 	return results
-}
-
-func parseDiceCount(countStr string) int {
-	count, err := strconv.Atoi(countStr)
-	if err != nil {
-		return 0
-	}
-	return count
-}
-
-func parseDiceSides(sidesStr string) int {
-	sides, err := strconv.Atoi(sidesStr)
-	if err != nil {
-		return 0
-	}
-	return sides
 }
