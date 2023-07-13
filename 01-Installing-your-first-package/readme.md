@@ -14,10 +14,12 @@
 touch .env
 ```
 2. enter these fields in the file to fill with your Discord Bot information
+```
 DISCORD_BOT_APP_ID="your-app-id"
 DISCORD_BOT_PUBLIC_KEY="your-puclic-key"
 DISCORD_BOT_TOKEN="your-bot-token"
 DISCORD_BOT_PERMISSIONS_INT="your-permissions-integer"
+```
 
 3. Import your environment variables, editing bot.go
 ```go

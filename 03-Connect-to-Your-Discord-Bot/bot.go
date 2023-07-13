@@ -30,7 +30,7 @@ func main() {
 		return
 	}
 
-	// Wait here until interrupted.
+	// Keep listening until interrupted.
 	fmt.Println("Bot is now running. Press Ctrl+C to exit.")
 	<-make(chan struct{})
 }

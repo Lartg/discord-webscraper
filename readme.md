@@ -5,4 +5,6 @@
 - [DiscordGo](https://github.com/bwmarrin/discordgo)
 - [colly/v2]
 
-00-02 complete
+This is a tutorial for making a simple discord bot.
+
+It has been broken down into modules that you can cherry pick from.
