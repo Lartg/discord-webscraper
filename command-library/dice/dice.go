@@ -12,7 +12,7 @@ import (
 
 /*	----------------------------------------------------------------------------\
 This Function will:
-	Check if the message starts with "!"
+	Listen for a message that starts with "!"
 		Get the following message string that corresponds to a dice roll (e.g. 1d6, 2d6, 1d8)
 			Send a response message containing roll outcomes.
 */
@@ -37,7 +37,7 @@ func Roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 			}
 			s.ChannelMessageSend(m.ChannelID, response)
 		} else {
-			s.ChannelMessageSend(m.ChannelID, "Invalid dice roll command. Use form of How many dice rolled, a 'd' for dice, and how many sides. Ex. 1d6 rolls 1 dice with 6 sides.")
+			s.ChannelMessageSend(m.ChannelID, "Invalid dice roll command. Use form of How many dice rolled, a 'd' for dice, and how many sides. Ex. !1d6 rolls 1 dice with 6 sides.")
 		}
 	}
 }

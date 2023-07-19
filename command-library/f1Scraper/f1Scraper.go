@@ -9,8 +9,8 @@ import (
 )
 
 /* ----------------------------------------------------------------------------
-This Function will:
-	Check if the message starts with "./"
+This Package will:
+	Listen for a message that starts with "./"
 		Get the command string.
 		Scrape a website for matches to the command
 			return links to matches
