@@ -26,7 +26,7 @@ func Roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// --------------------NEW STUFF BELOW-----------------------
 	if strings.HasPrefix(m.Content, "!") {
 		command := strings.TrimPrefix(m.Content, "!")
-		result := rollDice(command)
+		result := rollHelper(command)
 		if result != nil {
 			response := fmt.Sprintf("Rolling %s: ", command)
 			for i, roll := range result {
@@ -43,7 +43,7 @@ func Roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 // Our Dice rolling helper function
-func rollDice(roll string) []int {
+func rollHelper(roll string) []int {
 	parts := strings.Split(roll, "d")
 	if len(parts) != 2 {
 		return nil

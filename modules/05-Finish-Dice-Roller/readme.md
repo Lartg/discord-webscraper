@@ -33,7 +33,7 @@ func main() {
 	}
 
 	// Register command handlers - these read messages for prefixes to check if they need to do things. commands could get very complex using many flags
-	dg.AddHandler(diceCreate) // uses "!" message prefix
+	dg.AddHandler(roll) // uses "!" message prefix
 
 	// Open a websocket connection to Discord.
 	err = dg.Open()
@@ -59,7 +59,7 @@ func main() {
   4. We construct a message to send to our discord channel.
   5. Send the message.
 ```go
-func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+func roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Ignore messages from the bot itself or other bots to prevent recursive requests
 	if m.Author.ID == s.State.User.ID || m.Author.Bot {
 		return
@@ -68,7 +68,7 @@ func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// --------------------NEW STUFF BELOW-----------------------
 	if strings.HasPrefix(m.Content, "!") {
 		command := strings.TrimPrefix(m.Content, "!")
-		result := rollDice(command)
+		result := rollHelper(command)
 		if result != nil {
 			response := fmt.Sprintf("Rolling %s: ", command)
 			for i, roll := range result {
@@ -89,7 +89,7 @@ func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 ### rollDice(command)
   - This function takes a dice roll (1d6), and will output an array or random rolls
   ```go
-  func rollDice(roll string) []int {
+  func rollHelper(roll string) []int {
   ```
   - the function first splits the command into two parts: numDice and numSides
   ```go

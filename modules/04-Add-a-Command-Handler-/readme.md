@@ -8,7 +8,7 @@
   - Beneath the main function of the program, define a function that we will use as our command handler:
 
   ```go
-  func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+  func roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Ignore messages from the bot itself or other bots to prevent recursive requests
 	if m.Author.ID == s.State.User.ID || m.Author.Bot {
 		return
@@ -24,7 +24,7 @@
     - I like to use message prefixes as flags. Something easy to type, but you wouldn't typically start a message/sentence with. In this tutorial messages that begin with an "!" will be read as a command.
     
   ```go
-  func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+  func roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Ignore messages from the bot itself or other bots to prevent recursive requests
 	if m.Author.ID == s.State.User.ID || m.Author.Bot {
 		return
@@ -39,7 +39,7 @@
     - before opening the websocket connection, we register our command handlers, refer to bot.go if this is confusing
   ```go
   // Register command handlers - these read messages for prefixes to check if they need to do things. commands could get very complex using many flags
-	dg.AddHandler(diceCreate) // uses "!" message prefix
+	dg.AddHandler(roll) // uses "!" message prefix
   ```
 ## Sending a Response
 - Start your bot, and make sure that messages with our command flag are received and a channel message is sent in response.

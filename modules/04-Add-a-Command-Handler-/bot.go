@@ -25,7 +25,7 @@ func main() {
 	}
 
 	// Register command handlers - these read messages for prefixes to check if they need to do things. commands could get very complex using many flags
-	dg.AddHandler(diceCreate) // uses "!" message prefix
+	dg.AddHandler(roll) // uses "!" message prefix
 
 	// Open a websocket connection to Discord.
 	err = dg.Open()
@@ -45,7 +45,7 @@ This Function will:
 	Confirm signs of life with a message in the discord channel
 */
 
-func diceCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+func roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Ignore messages from the bot itself or other bots to prevent recursive requests
 	if m.Author.ID == s.State.User.ID || m.Author.Bot {
 		return
