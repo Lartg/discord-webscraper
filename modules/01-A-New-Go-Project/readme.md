@@ -1,7 +1,7 @@
 ## [Go](https://go.dev/) - The language used in this tutorial
-  - ### If unfamiliar with Go, this will help you
-    - take [A Tour of Go](https://go.dev/tour/welcome/1)
-    - [Installation Instructions](https://go.dev/doc/install) (vary by what machine you are using)
+  - ### Getting started:
+    1. take [A Tour of Go](https://go.dev/tour/welcome/1)
+    2. [Installation Instructions](https://go.dev/doc/install) vary by machine
   - ### Starting your first go project
   - Open a terminal in your root directory (keep it open), run: 
     ```

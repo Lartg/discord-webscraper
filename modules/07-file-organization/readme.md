@@ -1,29 +1,27 @@
-# Avoiding technical debt
-If you want to keep using the same bot, but keep adding features to it, you'll end up with a really messy bot.go. This part of the tutorial will teach you how to store different commands in a reusable library.
+# Avoid more technical debt
+Adding more features to bot.go gets messy fast. This part of the tutorial focuses on storing different commands in a reusable library.
 
-## Creating the Library
+# Create the Library
 1. Make a new directory to store commands, make a directory for our dice package, an empty go file
-```
-mkdir command-library
-cd command-library
-mkdir dice
-cd dice
-touch dice.go
-
-```
+    ```
+    mkdir command-library
+    cd command-library
+    mkdir dice
+    cd dice
+    touch dice.go
+    ```
 
 2. Name the package in dice.go
 
-```go
-package dice
-```
+    ```go
+    package dice
+    ```
 
 3. Cut and paste the roll and roll helper function from bot.go to dice.go.
-see my command-library for an example.
 
-It is important to rename the roll function to be capital (R) - Roll.()
+4. Capitilize the first name of the function.
 
-#### Import the package and register as a handler
+# Import the package and register as a handler
 
 ```go
 // bot.go
@@ -46,9 +44,7 @@ func main() {
 }
 
 ```
-From here on out, whenever we want to make changes to our command handlers, or add commands we will use our command library to do so. This will make our code more modular, and easy to debug.
-
-## Getting ready for module 6
+# Getting ready for module 6
 
 1. create a new package in your command library:
   ```

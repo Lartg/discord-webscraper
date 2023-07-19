@@ -1,7 +1,6 @@
-# Wrapping up the Dice Roller
-## Main Function
- - Your main function should look like this. We will only be changing the event handler.
- - For each command I like to add a new handler.
+# Main Function
+Your main function should look like this:
+
 ```go
 package main
 
@@ -48,16 +47,16 @@ func main() {
 }
 ```
 # Creating the dice roller
-  - the bot will receive dice roll commands in this form:
-  - !1d6: 1 dice 6 sides
-  - !2d4: 2 dice 4 sides each
-## this will be our new event handler
-  - We only want to handle channel communication with this function. All command processing will be done with a helper function. This lets us clearly divide what our bot is doing, and debug easily.
-  1. Check for our command prefix "!", then trim it, as it is not relevent to our instructions.
-  2. we call our helper function, and pass through our command. This will return an array of dice rolls to send out.
-  3. Quick error check, and make sure that users are using the right command format.
-  4. We construct a message to send to our discord channel.
-  5. Send the message.
+The bot will receive dice roll commands in this form:
+  - !1d6: command flag, 1 dice 6 sides
+  - !2d4: command flag, 2 dice 4 sides each
+# New event handler
+We only want to handle channel communication with this function. All command processing will be done with a helper function. This lets us clearly divide what our bot is doing, and debug easily.
+  1. Check for the command prefix "!" and trim it
+  2. Call the helper function to generate an array of dice rolls
+  3. Error check
+  4. Construct a message to send to our discord channel
+  5. Send the message
 ```go
 func roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Ignore messages from the bot itself or other bots to prevent recursive requests
@@ -68,7 +67,7 @@ func roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// --------------------NEW STUFF BELOW-----------------------
 	if strings.HasPrefix(m.Content, "!") {
 		command := strings.TrimPrefix(m.Content, "!")
-		result := rollHelper(command)
+		result := nil //rollHelper(command)
 		if result != nil {
 			response := fmt.Sprintf("Rolling %s: ", command)
 			for i, roll := range result {
@@ -84,14 +83,15 @@ func roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 }
 ```
-## Helper functions
 
-### rollDice(command)
-  - This function takes a dice roll (1d6), and will output an array or random rolls
-  ```go
+
+# rollHelper(command)
+- Input: dice roll (e.g. 1d4)
+- Output: an array of random roll(s)
+```go
   func rollHelper(roll string) []int {
-  ```
-  - the function first splits the command into two parts: numDice and numSides
+```
+  first split the command into two parts: numDice and numSides
   ```go
   parts := strings.Split(roll, "d")
 	if len(parts) != 2 {
@@ -107,18 +107,18 @@ func roll(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return nil
 	}
   ```
-  - We then generate a random seed based upon the time of the request to ensure that we don't constantly repeat rolls.
+  Generate a random seed from the current time:
   ```go
   rand.Seed(time.Now().UnixNano())
   ```
-  - then we make an array, and store as many random rolls (from 1 to the number of sides commanded) as we have dice in the command.
+  Initialize an array, and store all rolls:
   ```go
   results := make([]int, numDice)
 	for i := 0; i < numDice; i++ {
 		results[i] = rand.Intn(numSides) + 1
 	}
   ```
-  - return the results to be sent to the channel
+  return the results to be sent to the channel
   ```go
     return results
   }

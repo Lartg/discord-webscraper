@@ -66,11 +66,11 @@ func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
 			return
 		}
 
-		// Send all the collected messages as a reply in a single thread
+		// Send all the collected messages as a discord reply
 		reply := strings.Join(messages, "\n")
 		_, err = s.ChannelMessageSendReply(m.ChannelID, reply, m.Reference())
 		if err != nil {
-			s.ChannelMessageSendReply(m.ChannelID, "No matching articles found, check spelling", m.Reference())
+			s.ChannelMessageSendReply(m.ChannelID, "No matching articles found, check spelling?", m.Reference())
 		}
 
 	}
