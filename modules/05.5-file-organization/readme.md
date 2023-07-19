@@ -4,9 +4,9 @@ If you want to keep using the same bot, but keep adding features to it, you'll e
 ## Creating the Library
 1. Make a new directory to store commands, make a directory for our dice package, an empty go file
 ```
-touch command-library
+mkdir command-library
 cd command-library
-touch dice
+mkdir dice
 cd dice
 touch dice.go
 
@@ -32,7 +32,7 @@ package main
 import (
 	...
 
-	"github.com/Lartg/discord-webscraper/command-library/dice"
+	"github.com/<your-username>/<your-repo>/command-library/dice"
   ...
 )
 
@@ -46,3 +46,4 @@ func main() {
 }
 
 ```
+From here on out, whenever we want to make changes to our command handlers, or add commands we will use our command library to do so. This will make our code more modular, and easy to debug.
