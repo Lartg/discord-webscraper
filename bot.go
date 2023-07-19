@@ -26,8 +26,8 @@ func main() {
 	}
 
 	// Register command handlers - these read messages for prefixes to check if they need to do things. commands could get very complex using many flags
-	dg.AddHandler(f1Scraper.Scrape) // uses "./" message prefix
 	dg.AddHandler(dice.Roll)        // uses "!" message prefix
+	dg.AddHandler(f1Scraper.Scrape) // uses "./" message prefix
 
 	// Open a websocket connection to Discord.
 	err = dg.Open()
