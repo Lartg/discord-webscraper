@@ -1,7 +1,6 @@
 package f1Scraper
 
 import (
-	"fmt"
 	"log"
 	"strings"
 
@@ -15,6 +14,7 @@ This Function will:
 		Get the command string.
 		Scrape a website for matches to the command
 			return links to matches
+			return a response if none
 */
 
 func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -31,22 +31,21 @@ func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
 		// Create a new collector to scrape our baseURL
 		c := colly.NewCollector()
 
+		// Store the messages to be sent as a reply in a slice
+		var messages []string
+
 		//--------------------------------------------------------
 		/*
 			This function isolates the HTML elements with the css selectors matching the first parameter.
-			Then we do cool things and send a response to our discord server messaging channel
-
-			TODO:
-			add the response as a thread to the request, and have a reply for no matches
+			Then we do cool things and append the response to our messages slice.
 		*/
 
 		c.OnHTML("#article-list .col-12", func(e *colly.HTMLElement) {
-
 			// get article card title
 			title := e.ChildTexts("p")
 
 			// if title contains query store anchor
-			queryCheck := strings.Contains((title[1]), query)
+			queryCheck := strings.Contains(title[1], query)
 			if queryCheck {
 				// get the anchor for the article
 				anchor := e.ChildAttr("a", "href")
@@ -54,8 +53,8 @@ func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
 				// make a link to the article by adding the anchor to our base URL
 				newURL := baseURL + anchor
 
-				// send link to matched article
-				s.ChannelMessageSend(m.ChannelID, newURL)
+				// append the link to the messages slice
+				messages = append(messages, newURL)
 			}
 		})
 
@@ -66,7 +65,13 @@ func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
 			log.Println("Error scraping Google search page: ", err)
 			return
 		}
-		fmt.Println("Successfully scraped f1 latest news, if no article sent there may be no matches, will create a message response for this case")
+
+		// Send all the collected messages as a reply in a single thread
+		reply := strings.Join(messages, "\n")
+		_, err = s.ChannelMessageSendReply(m.ChannelID, reply, m.Reference())
+		if err != nil {
+			s.ChannelMessageSendReply(m.ChannelID, "No matching articles found, check spelling", m.Reference())
+		}
 
 	}
 }
