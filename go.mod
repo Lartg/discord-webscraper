@@ -1,8 +1,11 @@
 module github.com/Lartg/discord-webscraper
 
 replace github.com/Lartg/discord-webscraper/01-environment-setup => ./01-environment-setup
+
 replace github.com/Lartg/discord-webscraper/02-connecting-to-your-discord-bot => ./02-connecting-to-your-discord-bot
+
 replace github.com/Lartg/discord-webscraper/03-sending-a-channel-message => ./03-sending-a-channel-message
+
 replace github.com/Lartg/discord-webscraper/04-Adding-a-web-scraper => ./04-Adding-a-web-scraper
 
 go 1.20
