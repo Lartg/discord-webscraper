@@ -1,7 +1,6 @@
 package f1Scraper
 
 import (
-	"fmt"
 	"log"
 	"strings"
 
@@ -12,9 +11,7 @@ import (
 /* ----------------------------------------------------------------------------
 This Function will:
 	Check if the message starts with "./"
-		Get the command string.
-		Scrape a website for matches to the command
-			return links to matches
+		Return the most recent f1 news article
 */
 
 func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -25,7 +22,6 @@ func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	// Parse command
 	if strings.HasPrefix(m.Content, "./") {
-		query := strings.TrimPrefix(m.Content, "./")
 		baseURL := "https://www.formula1.com"
 
 		// Create a new collector to scrape our baseURL
@@ -33,30 +29,21 @@ func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		//--------------------------------------------------------
 		/*
-			This function isolates the HTML elements with the css selectors matching the first parameter.
-			Then we do cool things and send a response to our discord server messaging channel
-
-			TODO:
-			add the response as a thread to the request, and have a reply for no matches
+			This callback function isolates the anchor associated with the Newest Article card
+			Then adds this anchor to our baseURL and shares the URL with DiscordGo
 		*/
 
 		c.OnHTML("#article-list .col-12", func(e *colly.HTMLElement) {
+			// get the anchor for the article
+			// TODO SEND ONLY THE FIRST_______________
+			anchor := e.ChildAttr("a", "href")
 
-			// get article card title
-			title := e.ChildTexts("p")
+			// make a link to the article by adding the anchor to our base URL
+			newURL := baseURL + anchor
 
-			// if title contains query store anchor
-			queryCheck := strings.Contains((title[1]), query)
-			if queryCheck {
-				// get the anchor for the article
-				anchor := e.ChildAttr("a", "href")
+			// send link to matched article
+			s.ChannelMessageSend(m.ChannelID, newURL)
 
-				// make a link to the article by adding the anchor to our base URL
-				newURL := baseURL + anchor
-
-				// send link to matched article
-				s.ChannelMessageSend(m.ChannelID, newURL)
-			}
 		})
 
 		//--------------------------------------------------------
@@ -66,7 +53,5 @@ func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
 			log.Println("Error scraping Google search page: ", err)
 			return
 		}
-		fmt.Println("Successfully scraped f1 latest news, if no article sent there may be no matches, will create a message response for this case")
-
 	}
 }

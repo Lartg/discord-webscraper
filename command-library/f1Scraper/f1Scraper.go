@@ -62,7 +62,7 @@ func Scrape(s *discordgo.Session, m *discordgo.MessageCreate) {
 		// Visit the search URL and scrape the page with our callback
 		err := c.Visit(baseURL + "/en/latest/all.html")
 		if err != nil {
-			log.Println("Error scraping Google search page: ", err)
+			log.Println("Error scraping f1 latest news page: ", err)
 			return
 		}
 
